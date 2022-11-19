@@ -1,48 +1,3 @@
-<script setup lang="ts">
-import groupMatches from './group-matches';
-
-/*
-const groups = {
-  'Group A': [{ Qatar: 0 }, { Ecuaror: 0 }, { Senegal: 0 }, { Netherlands: 0 }],
-  'Group B': [{ England: 0 }, { Iran: 0 }, { USA: 0 }, { Wales: 0 }],
-  'Group C': [{ Argentina: 0 }, { 'Saudi Arabia': 0 }, { Mexico: 0 }, { Poland: 0 }],
-  'Group D': [{ France: 0 }, { Australia: 0 }, { Denmark: 0 }, { Tunisia: 0 }],
-  'Group E': [{ Spain: 0 }, { 'Costa Rica': 0 }, { Germany: 0 }, { Japan: 0 }],
-  'Group F': [{ Belgium: 0 }, { Canada: 0 }, { Morocco: 0 }, { Croatia: 0 }],
-  'Group G': [{ Brazil: 0 }, { Serbia: 0 }, { Switzerland: 0 }, { Cameroon: 0 }],
-  'Group H': [{ Portugal: 0 }, { Ghana: 0 }, { Uruguay: 0 }, { 'South Korea': 0 }],
-};
-*/
-
-const groups = {
-  'Group A': ['Qatar', 'Ecuaror', 'Senegal', 'Netherlands'],
-  'Group B': ['England', 'Iran', 'USA', 'Wales'],
-  'Group C': ['Argentina', 'Saudi Arabia', 'Mexico', 'Poland'],
-  'Group D': ['France', 'Australia', 'Denmark', 'Tunisia'],
-  'Group E': ['Spain', 'Costa Rica', 'Germany', 'Japan'],
-  'Group F': ['Belgium', 'Canada', 'Morocco', 'Croatia'],
-  'Group G': ['Brazil', 'Serbia', 'Switzerland', 'Cameroon'],
-  'Group H': ['Portugal', 'Ghana', 'Uruguay', 'South Korea'],
-};
-
-const highlightWinner = (event: Event, first: string, second?: string) => {
-  const target = event.target as HTMLInputElement;
-  const parent = target.closest('td');
-  const row = parent?.closest('tr');
-  if (row?.childNodes) {
-    row.childNodes.forEach((child) => {
-      if (child.nodeName.toLowerCase() === 'td') {
-        (child as HTMLTableCellElement).classList.remove('border-green-600');
-      }
-    });
-  }
-  parent?.classList.add('border-green-600');
-  if (first && second) {
-    // this is a draw, find both
-  }
-};
-</script>
-
 <template>
   <div class="container mx-auto my-4 text-center">
     <h1 class="mb-8 text-4xl">World Cup 2022 Group Stage</h1>
@@ -107,5 +62,50 @@ const highlightWinner = (event: Event, first: string, second?: string) => {
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import groupMatches from './group-matches';
+
+/*
+const groups = {
+  'Group A': [{ Qatar: 0 }, { Ecuaror: 0 }, { Senegal: 0 }, { Netherlands: 0 }],
+  'Group B': [{ England: 0 }, { Iran: 0 }, { USA: 0 }, { Wales: 0 }],
+  'Group C': [{ Argentina: 0 }, { 'Saudi Arabia': 0 }, { Mexico: 0 }, { Poland: 0 }],
+  'Group D': [{ France: 0 }, { Australia: 0 }, { Denmark: 0 }, { Tunisia: 0 }],
+  'Group E': [{ Spain: 0 }, { 'Costa Rica': 0 }, { Germany: 0 }, { Japan: 0 }],
+  'Group F': [{ Belgium: 0 }, { Canada: 0 }, { Morocco: 0 }, { Croatia: 0 }],
+  'Group G': [{ Brazil: 0 }, { Serbia: 0 }, { Switzerland: 0 }, { Cameroon: 0 }],
+  'Group H': [{ Portugal: 0 }, { Ghana: 0 }, { Uruguay: 0 }, { 'South Korea': 0 }],
+};
+*/
+
+const groups = {
+  'Group A': ['Qatar', 'Ecuaror', 'Senegal', 'Netherlands'],
+  'Group B': ['England', 'Iran', 'USA', 'Wales'],
+  'Group C': ['Argentina', 'Saudi Arabia', 'Mexico', 'Poland'],
+  'Group D': ['France', 'Australia', 'Denmark', 'Tunisia'],
+  'Group E': ['Spain', 'Costa Rica', 'Germany', 'Japan'],
+  'Group F': ['Belgium', 'Canada', 'Morocco', 'Croatia'],
+  'Group G': ['Brazil', 'Serbia', 'Switzerland', 'Cameroon'],
+  'Group H': ['Portugal', 'Ghana', 'Uruguay', 'South Korea'],
+};
+
+const highlightWinner = (event: Event, first: string, second?: string) => {
+  const target = event.target as HTMLInputElement;
+  const parent = target.closest('td');
+  const row = parent?.closest('tr');
+  if (row?.childNodes) {
+    row.childNodes.forEach((child) => {
+      if (child.nodeName.toLowerCase() === 'td') {
+        (child as HTMLTableCellElement).classList.remove('border-green-600');
+      }
+    });
+  }
+  parent?.classList.add('border-green-600');
+  if (first && second) {
+    // this is a draw, find both
+  }
+};
+</script>
 
 <style></style>
