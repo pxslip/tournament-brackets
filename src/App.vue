@@ -1,14 +1,12 @@
 <template>
   <div class="container mx-auto my-4 text-center">
-    <h1 class="mb-8 text-4xl">World Cup 2022 Group Stage</h1>
+    <h1 class="mb-8 text-4xl print:break-after-page">World Cup 2022 Group Stage</h1>
     <div class="grid grid-cols-1 gap-4 print:block lg:grid-cols-2 2xl:grid-cols-3">
-      <div v-for="(fixtures, group) in groupMatches" class="print:break-after-page">
-        <table class="w-full border-separate">
-          <caption class="text-2xl">
-            {{
-              group
-            }}
-            matches
+      <div v-for="(fixtures, group) in groupMatches" class="pb-2 print:break-after-page">
+        <h2 class="text-2xl">{{ group }}</h2>
+        <table class="mt-8 w-full border-separate">
+          <caption class="text-xl">
+            Matches
           </caption>
           <thead>
             <tr>
@@ -47,8 +45,8 @@
             </template>
           </tbody>
         </table>
-        <table class="mt-16 w-full border-separate">
-          <caption class="text-2xl">
+        <table class="mt-8 w-full border-separate">
+          <caption class="text-xl">
             Points
           </caption>
           <thead>
