@@ -21,18 +21,24 @@
           <tbody>
             <template v-for="fixture in fixtures">
               <tr>
-                <td class="border p-2">
-                  {{ fixture.home }}
-                  <input type="radio" :name="`fixture_${fixture.matchNumber}`" @change="highlightWinner($event, fixture.matchNumber, fixture.home)" />
+                <td class="border">
+                  <label class="block h-full w-full p-2">
+                    {{ fixture.home }}
+                    <input type="radio" :name="`fixture_${fixture.matchNumber}`" @change="highlightWinner($event, fixture.matchNumber, fixture.home)" />
+                  </label>
                 </td>
                 <td class="border p-2">vs</td>
-                <td class="border p-2">
-                  {{ fixture.away }}
-                  <input type="radio" :name="`fixture_${fixture.matchNumber}`" @change="highlightWinner($event, fixture.matchNumber, fixture.away)" />
+                <td class="border">
+                  <label class="block h-full w-full p-2">
+                    {{ fixture.away }}
+                    <input type="radio" :name="`fixture_${fixture.matchNumber}`" @change="highlightWinner($event, fixture.matchNumber, fixture.away)" />
+                  </label>
                 </td>
-                <td class="border p-2">
-                  Draw
-                  <input type="radio" :name="`fixture_${fixture.matchNumber}`" @change="highlightWinner($event, fixture.matchNumber, 'draw')" />
+                <td class="border">
+                  <label class="block h-full w-full p-2">
+                    Draw
+                    <input type="radio" :name="`fixture_${fixture.matchNumber}`" @change="highlightWinner($event, fixture.matchNumber, 'draw')" />
+                  </label>
                 </td>
               </tr>
               <tr>
