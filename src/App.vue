@@ -1,8 +1,8 @@
 <template>
   <div class="container mx-auto my-4 text-center">
     <h1 class="mb-8 text-4xl">World Cup 2022 Group Stage</h1>
-    <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 2xl:grid-cols-3">
-      <div v-for="(fixtures, group) in groupMatches">
+    <div class="grid grid-cols-1 gap-4 print:block lg:grid-cols-2 2xl:grid-cols-3">
+      <div v-for="(fixtures, group) in groupMatches" class="print:break-after-page">
         <table class="w-full border-separate">
           <caption class="text-2xl">
             {{
