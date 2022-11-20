@@ -72,19 +72,6 @@ import groupMatches from './group-matches';
 import allFixtures from './all-fixtures';
 import { reactive, watch } from 'vue';
 
-/*
-const groups = {
-  'Group A': [{ Qatar: 0 }, { Ecuaror: 0 }, { Senegal: 0 }, { Netherlands: 0 }],
-  'Group B': [{ England: 0 }, { Iran: 0 }, { USA: 0 }, { Wales: 0 }],
-  'Group C': [{ Argentina: 0 }, { 'Saudi Arabia': 0 }, { Mexico: 0 }, { Poland: 0 }],
-  'Group D': [{ France: 0 }, { Australia: 0 }, { Denmark: 0 }, { Tunisia: 0 }],
-  'Group E': [{ Spain: 0 }, { 'Costa Rica': 0 }, { Germany: 0 }, { Japan: 0 }],
-  'Group F': [{ Belgium: 0 }, { Canada: 0 }, { Morocco: 0 }, { Croatia: 0 }],
-  'Group G': [{ Brazil: 0 }, { Serbia: 0 }, { Switzerland: 0 }, { Cameroon: 0 }],
-  'Group H': [{ Portugal: 0 }, { Ghana: 0 }, { Uruguay: 0 }, { 'South Korea': 0 }],
-};
-*/
-
 const groups = {
   'Group A': ['Qatar', 'Ecuador', 'Senegal', 'Netherlands'],
   'Group B': ['England', 'Iran', 'USA', 'Wales'],
@@ -93,7 +80,7 @@ const groups = {
   'Group E': ['Spain', 'Costa Rica', 'Germany', 'Japan'],
   'Group F': ['Belgium', 'Canada', 'Morocco', 'Croatia'],
   'Group G': ['Brazil', 'Serbia', 'Switzerland', 'Cameroon'],
-  'Group H': ['Portugal', 'Ghana', 'Uruguay', 'South Korea'],
+  'Group H': ['Portugal', 'Ghana', 'Uruguay', 'Korea Republic'],
 };
 
 const results = reactive(new Map<number, string>());
