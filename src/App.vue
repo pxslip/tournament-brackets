@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto my-4 text-center">
     <h1 class="mb-8 text-4xl">World Cup 2022 Group Stage</h1>
-    <div class="grid grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 2xl:grid-cols-3">
       <div v-for="(fixtures, group) in groupMatches">
         <table class="w-full border-separate">
           <caption class="text-2xl">
@@ -23,16 +23,16 @@
               <tr>
                 <td class="border p-2">
                   {{ fixture.home }}
-                  <input type="radio" :name="`fixture_${fixture.matchNumber}`" @change="highlightWinner($event, fixture.home)" />
+                  <input type="radio" :name="`fixture_${fixture.matchNumber}`" @change="highlightWinner($event, fixture.matchNumber, fixture.home)" />
                 </td>
                 <td class="border p-2">vs</td>
                 <td class="border p-2">
                   {{ fixture.away }}
-                  <input type="radio" :name="`fixture_${fixture.matchNumber}`" @change="highlightWinner($event, fixture.away)" />
+                  <input type="radio" :name="`fixture_${fixture.matchNumber}`" @change="highlightWinner($event, fixture.matchNumber, fixture.away)" />
                 </td>
                 <td class="border p-2">
                   Draw
-                  <input type="radio" :name="`fixture_${fixture.matchNumber}`" @change="highlightWinner($event, fixture.home, fixture.away)" />
+                  <input type="radio" :name="`fixture_${fixture.matchNumber}`" @change="highlightWinner($event, fixture.matchNumber, 'draw')" />
                 </td>
               </tr>
               <tr>
@@ -53,8 +53,8 @@
           </thead>
           <tbody>
             <tr class="text-lg" v-for="country in groups[group]">
-              <td class="border pl-2 text-left">{{ country }}</td>
-              <td class="rounded-sm border-2 shadow-inner" contenteditable="true"></td>
+              <td class="border text-left">{{ country }}</td>
+              <td class="border">{{ points.get(country) }}</td>
             </tr>
           </tbody>
         </table>
@@ -65,6 +65,8 @@
 
 <script setup lang="ts">
 import groupMatches from './group-matches';
+import allFixtures from './all-fixtures';
+import { reactive, watch } from 'vue';
 
 /*
 const groups = {
@@ -80,7 +82,7 @@ const groups = {
 */
 
 const groups = {
-  'Group A': ['Qatar', 'Ecuaror', 'Senegal', 'Netherlands'],
+  'Group A': ['Qatar', 'Ecuador', 'Senegal', 'Netherlands'],
   'Group B': ['England', 'Iran', 'USA', 'Wales'],
   'Group C': ['Argentina', 'Saudi Arabia', 'Mexico', 'Poland'],
   'Group D': ['France', 'Australia', 'Denmark', 'Tunisia'],
@@ -90,22 +92,57 @@ const groups = {
   'Group H': ['Portugal', 'Ghana', 'Uruguay', 'South Korea'],
 };
 
-const highlightWinner = (event: Event, first: string, second?: string) => {
+const results = reactive(new Map<number, string>());
+const points = reactive(new Map<string, number>());
+
+const winnerClasses = ['border-green-600', 'bg-green-100'];
+
+const highlightWinner = (event: Event, fixtureNum: number, winner: string) => {
   const target = event.target as HTMLInputElement;
   const parent = target.closest('td');
   const row = parent?.closest('tr');
   if (row?.childNodes) {
     row.childNodes.forEach((child) => {
       if (child.nodeName.toLowerCase() === 'td') {
-        (child as HTMLTableCellElement).classList.remove('border-green-600');
+        (child as HTMLTableCellElement).classList.remove(...winnerClasses);
       }
     });
   }
-  parent?.classList.add('border-green-600');
-  if (first && second) {
-    // this is a draw, find both
-  }
+  parent?.classList.add(...winnerClasses);
+  results.set(fixtureNum, winner);
 };
+
+watch(results, (newValue, oldValue) => {
+  points.clear();
+  newValue.forEach((winner, matchNumber) => {
+    if (winner === 'draw') {
+      const fixture = allFixtures.find((fixture) => matchNumber === fixture.MatchNumber);
+      if (fixture?.HomeTeam) {
+        const home = points.get(fixture?.HomeTeam);
+        if (home) {
+          points.set(fixture.HomeTeam, home + 1);
+        } else {
+          points.set(fixture.HomeTeam, 1);
+        }
+      }
+      if (fixture?.AwayTeam) {
+        const curPoints = points.get(fixture?.AwayTeam);
+        if (curPoints) {
+          points.set(fixture.AwayTeam, curPoints + 1);
+        } else {
+          points.set(fixture.AwayTeam, 1);
+        }
+      }
+    } else {
+      const curPoints = points.get(winner);
+      if (curPoints) {
+        points.set(winner, curPoints + 3);
+      } else {
+        points.set(winner, 3);
+      }
+    }
+  });
+});
 </script>
 
 <style></style>

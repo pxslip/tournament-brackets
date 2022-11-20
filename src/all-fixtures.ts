@@ -1,4 +1,4 @@
-const fixtures = [
+export default [
   {
     MatchNumber: 1,
     RoundNumber: 1,
@@ -704,22 +704,3 @@ const fixtures = [
     AwayTeamScore: null,
   },
 ];
-
-const fixturesByCountry: {
-  [team: string]: number[];
-} = {};
-
-for (const fixture of fixtures) {
-  if (fixture.Group !== null && fixture.HomeTeam !== 'To be announced' && fixture.AwayTeam !== 'To be announced') {
-    if (!fixturesByCountry[fixture.HomeTeam]) {
-      fixturesByCountry[fixture.HomeTeam] = [];
-    }
-    fixturesByCountry[fixture.HomeTeam].push(fixture.MatchNumber);
-    if (!fixturesByCountry[fixture.AwayTeam]) {
-      fixturesByCountry[fixture.AwayTeam] = [];
-    }
-    fixturesByCountry[fixture.AwayTeam].push(fixture.MatchNumber);
-  }
-}
-
-console.log(fixturesByCountry);
