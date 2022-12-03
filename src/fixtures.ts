@@ -705,21 +705,28 @@ const fixtures = [
   },
 ];
 
-const fixturesByCountry: {
-  [team: string]: number[];
+const myFixtures: {
+  [match: number]: {
+    date: string;
+    location: string;
+    match: number;
+    round: number;
+    home: string;
+    away: string;
+    group: string | null;
+  };
 } = {};
 
 for (const fixture of fixtures) {
-  if (fixture.Group !== null && fixture.HomeTeam !== 'To be announced' && fixture.AwayTeam !== 'To be announced') {
-    if (!fixturesByCountry[fixture.HomeTeam]) {
-      fixturesByCountry[fixture.HomeTeam] = [];
-    }
-    fixturesByCountry[fixture.HomeTeam].push(fixture.MatchNumber);
-    if (!fixturesByCountry[fixture.AwayTeam]) {
-      fixturesByCountry[fixture.AwayTeam] = [];
-    }
-    fixturesByCountry[fixture.AwayTeam].push(fixture.MatchNumber);
-  }
+  myFixtures[fixture.MatchNumber] = {
+    date: fixture.DateUtc,
+    location: fixture.Location,
+    match: fixture.MatchNumber,
+    round: fixture.RoundNumber,
+    home: fixture.HomeTeam,
+    away: fixture.AwayTeam,
+    group: fixture.Group,
+  };
 }
 
-console.log(fixturesByCountry);
+console.log(JSON.stringify(myFixtures));
