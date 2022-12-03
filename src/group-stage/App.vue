@@ -111,10 +111,11 @@ const groups = reactive<Groups>({});
 const teams = reactive<string[]>([]);
 const fixtures = reactive<Fixtures>({});
 
+const base = import.meta.env.BASE_URL;
+
 (async () => {
   const tournament = params.get('tournament');
-  const dataUrl = new URL(`../${tournament}.json`, window.location.href);
-  const response = await fetch(dataUrl);
+  const response = await fetch(`${base}${tournament}.json`);
   const data: Tournament = await response.json();
   Object.assign(groups, data.groups);
   teams.push(...data.teams);
