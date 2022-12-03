@@ -113,7 +113,8 @@ const fixtures = reactive<Fixtures>({});
 
 (async () => {
   const tournament = params.get('tournament');
-  const response = await fetch(`/tournament-brackets/${tournament}.json`);
+  const dataUrl = new URL(`../${tournament}.json`, window.location.href);
+  const response = await fetch(dataUrl);
   const data: Tournament = await response.json();
   Object.assign(groups, data.groups);
   teams.push(...data.teams);

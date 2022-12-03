@@ -27,7 +27,8 @@ const results = reactive<{ [match: number]: 'home' | 'away' }>({});
 if (params.has('tournament')) {
   (async () => {
     const tournament = params.get('tournament');
-    const response = await fetch(`/tournament-brackets/${tournament}.json`);
+    const dataUrl = new URL(`../${tournament}.json`, window.location.href);
+    const response = await fetch(dataUrl);
     const data: Tournament = await response.json();
     Object.assign(fixtures, data.fixtures);
     for (const match in data.fixtures) {
